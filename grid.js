@@ -2,11 +2,24 @@
 const grid = document.querySelector('.grid');
 const playButton = document.getElementById('btn-play');
 const difficultySelect = document.getElementById('select');
-const bombe = getArrayOfRandomIntBetween(1, 100, 16);
 
 // definisco il punteggio iniziale
 let score = 0;
 let gameOver = false;
+
+// funzione per generare posizioni casuali per le bombe
+function generateRandomBombPositions(cellCount) {
+    const bombPositions = [];
+    while (bombPositions.length < 16) {
+        //restituisce un numero random da 1 a cellCount
+        const randomPosition = getRandomIntInclusive(1, cellCount);
+        if (!bombPositions.includes(randomPosition)) {
+            // se non è presente, aggiungi la posizione all'array bombPositions con il metodo push. 
+            bombPositions.push(randomPosition);
+        }
+    }
+    return bombPositions;
+}
 
 // quando clicco play
 playButton.addEventListener('click', function () {
@@ -37,6 +50,9 @@ playButton.addEventListener('click', function () {
     }
     //console.log(cellCount, "caselle");
 
+    // Genera posizioni casuali per le bombe
+    const bombPositions = generateRandomBombPositions(cellCount);
+
     // creo la griglia
     for (let i = 0; i < cellCount; i++) {
         const cell = document.createElement('div');
@@ -60,19 +76,18 @@ playButton.addEventListener('click', function () {
             // Se il gioco è finito, non fare nulla
             if (gameOver) return;
 
-            if (bombe.includes(i + 1)) {
-                cell.style.backgroundColor = 'red';
+            if (bombPositions.includes(i + 1)) {
 
-//rimuovo immagine del fiore 
-const img = cell.querySelector('img');
-if (img) {
-    cell.removeChild(img);
-};
+                //rimuovo immagine del fiore 
+                const img = cell.querySelector('img');
+                if (img) {
+                    cell.removeChild(img);
+                };
 
-// immagine della bomba
-const bombImg = document.createElement('img');
-        bombImg.src = 'bomba.jpg'; 
-        cell.appendChild(bombImg);
+                // immagine della bomba
+                const bombImg = document.createElement('img');
+                bombImg.src = 'bomba.jpg';
+                cell.appendChild(bombImg);
 
                 //console.log("Hai cliccato su una bomba! La partita è finita.");
                 gameOver = true;
@@ -97,25 +112,6 @@ const bombImg = document.createElement('img');
         });
     }
 });
-
-//per caso dificoltà normale
-function getArrayOfRandomIntBetween(minRange, maxRange, number) {
-    const bombsArray = []
-
-    // popolare l'array con 16 numeri random non duplicati
-    while (bombsArray.length < number) {
-        // generare un numero random da rangeMin a rangeMAx
-        const n = getRandomIntInclusive(minRange, maxRange)
-
-        // se n non è presente nell'array di bombe
-        //console.log(bombsArray.includes(n))
-        if (bombsArray.includes(n) === false) {
-            // pushare il numero nell'array di bombe
-            bombsArray.push(n)
-        }
-    }
-    return bombsArray
-};
 
 // generare un numero random da rangeMin a rangeMAx   
 function getRandomIntInclusive(min, max) {
