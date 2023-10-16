@@ -10,7 +10,7 @@ let gameOver = false;
 
 // quando clicco play
 playButton.addEventListener('click', function () {
-    console.log("Hai cliccato sul pulsante 'PLAY'");
+    //console.log("Hai cliccato sul pulsante 'PLAY'");
 
     // resetto il punteggio
     score = 0;
@@ -20,11 +20,11 @@ playButton.addEventListener('click', function () {
     while (grid.firstChild) {
         grid.removeChild(grid.firstChild);
     }
-    console.log("La griglia è vuota");
+    //console.log("La griglia è vuota");
 
     // difficoltà selezionata 
     const selectedDifficulty = difficultySelect.value;
-    console.log("Difficoltà:", selectedDifficulty);
+    //console.log("Difficoltà:", selectedDifficulty);
 
     // creo griglia in base alla difficoltà
     let cellCount;
@@ -35,7 +35,7 @@ playButton.addEventListener('click', function () {
     } else if (selectedDifficulty === 'bonus49') {
         cellCount = 49;
     }
-    console.log(cellCount, "caselle");
+    //console.log(cellCount, "caselle");
 
     // creo la griglia
     for (let i = 0; i < cellCount; i++) {
@@ -74,7 +74,7 @@ const bombImg = document.createElement('img');
         bombImg.src = 'bomba.jpg'; 
         cell.appendChild(bombImg);
 
-                console.log("Hai cliccato su una bomba! La partita è finita.");
+                //console.log("Hai cliccato su una bomba! La partita è finita.");
                 gameOver = true;
                 setTimeout(function () {
                     alert("Hai cliccato su una bomba! La partita è finita. Il tuo punteggio è: " + score);
@@ -83,11 +83,11 @@ const bombImg = document.createElement('img');
                 cell.style.backgroundColor = 'aqua';
                 // Incrementa il punteggio
                 score++;
-                console.log("Hai cliccato sulla casella numero", i + 1);
+                //console.log("Hai cliccato sulla casella numero", i + 1);
 
                 // il gioco è vinto, per 16 bombe
                 if (score === cellCount - 16) {
-                    console.log("Hai vinto! Hai trovato tutte le caselle senza bomba.");
+                    //console.log("Hai vinto! Hai trovato tutte le caselle senza bomba.");
                     gameOver = true;
                     setTimeout(function () {
                         alert("Hai vinto! Hai trovato tutte le caselle senza bomba. Il tuo punteggio è: " + score);
@@ -108,7 +108,7 @@ function getArrayOfRandomIntBetween(minRange, maxRange, number) {
         const n = getRandomIntInclusive(minRange, maxRange)
 
         // se n non è presente nell'array di bombe
-        console.log(bombsArray.includes(n))
+        //console.log(bombsArray.includes(n))
         if (bombsArray.includes(n) === false) {
             // pushare il numero nell'array di bombe
             bombsArray.push(n)
