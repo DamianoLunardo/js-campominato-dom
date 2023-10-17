@@ -21,6 +21,12 @@ function generateRandomBombPositions(cellCount) {
     return bombPositions;
 }
 
+// generare un numero random da rangeMin a rangeMAx   
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min + 1) + min)
+};
 // quando clicco play
 playButton.addEventListener('click', function () {
     //console.log("Hai cliccato sul pulsante 'PLAY'");
@@ -113,10 +119,5 @@ playButton.addEventListener('click', function () {
     }
 });
 
-// generare un numero random da rangeMin a rangeMAx   
-function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min)
-    max = Math.floor(max)
-    return Math.floor(Math.random() * (max - min + 1) + min)
-};
+
 
